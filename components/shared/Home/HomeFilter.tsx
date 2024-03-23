@@ -7,7 +7,7 @@ import React from 'react'
 const HomeFilter = () => {
   const active = '';
   return (
-    <div className='mt-10 hidden md:flex flex-wrap gap-3'>
+    <div className='mt-10 hidden lg:flex flex-wrap gap-3'>
         {
             HomePageFilters.map((item) => (
                 <Button

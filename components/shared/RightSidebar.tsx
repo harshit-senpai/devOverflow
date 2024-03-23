@@ -5,50 +5,50 @@ import Tag from './Tag'
 
 const hotQuestion = [
     {
-        _id: 1, 
+        _id: '1', 
         title: 'How do I use express as a custom server in Next.js'
     },
     {
-        _id: 2, 
+        _id: '2', 
         title: 'Async/Await Function Not Handling Errors Properly'
     },
     {
-        _id: 3, 
+        _id: '3', 
         title: 'Next JS router'
     },
     {
-        _id: 4, 
+        _id: '4', 
         title: 'How can I get (query string) parameters from the URL in Next.js?'
     },
     {
-        _id: 5, 
+        _id: '5', 
         title: 'What is the best modern tech stack we can use to create a Stackoverflow clone?'
     }
 ]
 
 const popularTags = [
     {
-        _id: 1,
+        _id: '1',
         name: 'React',
         totalQuestions: 1
     },
     {
-        _id: 2,
+        _id: '2',
         name: 'Javascript',
         totalQuestions: 2
     },
     {
-        _id: 3,
+        _id: '3',
         name: 'Next.js',
         totalQuestions: 4
     },
     {
-        _id: 4,
+        _id: '4',
         name: 'Tailwindcss',
         totalQuestions: 9
     },
     {
-        _id: 5,
+        _id: '5',
         name: 'Prisma',
         totalQuestions: 10
     },

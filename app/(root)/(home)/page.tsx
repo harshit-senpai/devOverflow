@@ -1,6 +1,7 @@
 import Filter from "@/components/shared/Filter";
 import HomeFilter from "@/components/shared/Home/HomeFilter";
 import NoResult from "@/components/shared/NoResult";
+import QuestionCard from "@/components/shared/card/QuestionCard";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
@@ -21,30 +22,61 @@ const questions = [
         name: 'CSS'
       }
     ],
-    author: 'Ken Senpai',
-    upvotes: 10,
-    views: 100,
-    answer:3,
-    createdAt: '2021-09-20T00:00:00.000Z'
+    author: {
+      _id: '1',
+      name: 'Ken Senpai',
+      picture: 'ken.jpg'
+    },
+    upvotes: 100,
+    answers: [], 
+    createdAt: new Date('2021-09-20T00:00:00.000Z'),
+    views: 100
   },
   {
     _id: '2',
     title: 'How to learn Next.js',
     tags: [
       {
-        _id: '1',
+        _id: '3', // Changed tag ID
         name: 'javascript'
       },
       {
-        _id: '2',
-        name: 'Next.hs'
+        _id: '4', // Changed tag ID
+        name: 'Next.js'
       }
     ],
-    author: 'Ken Senpai',
-    upvotes: 10,
-    views: 100,
-    answer:3,
-    createdAt: '2021-09-20T00:00:00.000Z'
+    author: {
+      _id: '2', // Changed author ID
+      name: 'Alice',
+      picture: 'alice.jpg'
+    },
+    upvotes: 15, 
+    answers: [], 
+    createdAt: new Date('2021-09-21T00:00:00.000Z'),
+    views: 120 
+  },
+  {
+    _id: '3', 
+    title: 'How to use TypeScript with React',
+    tags: [
+      {
+        _id: '5', 
+        name: 'typescript'
+      },
+      {
+        _id: '3', 
+        name: 'javascript'
+      }
+    ],
+    author: {
+      _id: '3', 
+      name: 'Bob',
+      picture: 'bob.jpg'
+    },
+    upvotes: 20, 
+    answers: [],
+    createdAt: new Date('2021-09-22T00:00:00.000Z'), 
+    views: 80 
   }
 ]
 
@@ -71,7 +103,7 @@ export default function Home() {
           <Filter
           filters={HomePageFilters}
           otherClasses='min-h-[56px] sm:min-w-[170px]'
-          containerClasses='hidden max-md:flex'
+          containerClasses='hidden max-lg:flex'
           />
         </div>
         <HomeFilter/>
@@ -79,7 +111,17 @@ export default function Home() {
           {
             numQuestions > 0 ?
             questions.map((question) => (
-              'QuestionCard'
+              <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags}
+              author={question.author}
+              upvotes={question.upvotes}
+              views={question.views}
+              answers={question.answers}
+              createdAt={question.createdAt}
+              />
             ))
             : <NoResult 
               title="There's no question to show"
