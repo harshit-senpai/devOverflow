@@ -21,12 +21,18 @@ import { QuestionsSchema } from "@/utils/validations";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
+import { usePathname, useRouter } from "next/navigation";
 
 const type: any = "create";
 
-const Question = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+interface Props {
+  user: string;
+}
 
+const Question = ({ user }: Props) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const Router = useRouter();
+  const pathName = usePathname();
   const handleInputKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     field: any
@@ -74,7 +80,14 @@ const Question = () => {
   async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
     try {
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(user),
+      });
+
+      Router.push('/')
     } catch (error) {
     } finally {
       setIsSubmitting(false);
