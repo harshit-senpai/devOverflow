@@ -10,8 +10,8 @@ import Link from "next/link";
 import { getAllQuestions } from "@/lib/actions/question.action";
 
 export default async function Home() {
+  // @ts-ignore
   const result = await getAllQuestions({});
-  console.log(result.questions);
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">

@@ -69,6 +69,7 @@ const QuestionCard = ({
           value={formatNumber(upvotes)}
           textStyles="small-medium text-dark400_light800"
         />
+        {/* @ts-ignore */}
         <Metric
           imgUrl="/assets/icons/message.svg"
           alt="answers"
@@ -76,6 +77,7 @@ const QuestionCard = ({
           // value={formatNumber(answers.length)}
           textStyles="small-medium text-dark400_light800"
         />
+        {/* @ts-ignore */}
         <Metric
           imgUrl="/assets/icons/eye.svg"
           alt="views"
