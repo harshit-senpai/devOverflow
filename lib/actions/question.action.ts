@@ -7,7 +7,7 @@ import { CreateQuestionParams, GetQuestionByIdParams } from "./shared.types";
 import User from "@/database/user.model";
 import { revalidatePath } from "next/cache";
 
-export async function getAllQuestions(params: GetQuestionByIdParams) {
+export async function getAllQuestions() {
   try {
     connectToDatabase();
 

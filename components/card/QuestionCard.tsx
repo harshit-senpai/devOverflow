@@ -69,20 +69,18 @@ const QuestionCard = ({
           value={formatNumber(upvotes)}
           textStyles="small-medium text-dark400_light800"
         />
-        {/* @ts-ignore */}
         <Metric
           imgUrl="/assets/icons/message.svg"
           alt="answers"
           title="Answers"
-          // value={formatNumber(answers.length)}
+          value={"100k"}
           textStyles="small-medium text-dark400_light800"
         />
-        {/* @ts-ignore */}
         <Metric
           imgUrl="/assets/icons/eye.svg"
           alt="views"
           title="views"
-          // value={formatNumber(views)}
+          value={"100k"}
           textStyles="small-medium text-dark400_light800"
         />
       </div>
