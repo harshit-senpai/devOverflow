@@ -85,9 +85,10 @@ const Question = ({ user }: Props) => {
         content: values.explanation,
         tags: values.tags,
         author: JSON.parse(user),
+        path: pathName,
       });
 
-      Router.push('/')
+      Router.push("/");
     } catch (error) {
     } finally {
       setIsSubmitting(false);

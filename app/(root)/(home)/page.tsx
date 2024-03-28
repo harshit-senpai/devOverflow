@@ -7,82 +7,11 @@ import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+import { getAllQuestions } from "@/lib/actions/question.action";
 
-const questions = [
-  {
-    _id: "1",
-    title: "How to center a div",
-    tags: [
-      {
-        _id: "1",
-        name: "HTML",
-      },
-      {
-        _id: "2",
-        name: "CSS",
-      },
-    ],
-    author: {
-      _id: "1",
-      name: "Ken Senpai",
-      picture: "ken.jpg",
-    },
-    upvotes: 100,
-    answers: [],
-    createdAt: new Date("2021-09-20T00:00:00.000Z"),
-    views: 100,
-  },
-  {
-    _id: "2",
-    title: "How to learn Next.js",
-    tags: [
-      {
-        _id: "3",
-        name: "javascript",
-      },
-      {
-        _id: "4",
-        name: "Next.js",
-      },
-    ],
-    author: {
-      _id: "2",
-      name: "Alice",
-      picture: "alice.jpg",
-    },
-    upvotes: 15,
-    answers: [],
-    createdAt: new Date("2021-09-21T00:00:00.000Z"),
-    views: 120,
-  },
-  {
-    _id: "3",
-    title: "How to use TypeScript with React",
-    tags: [
-      {
-        _id: "5",
-        name: "typescript",
-      },
-      {
-        _id: "3",
-        name: "javascript",
-      },
-    ],
-    author: {
-      _id: "3",
-      name: "Bob",
-      picture: "bob.jpg",
-    },
-    upvotes: 20,
-    answers: [],
-    createdAt: new Date("2021-09-22T00:00:00.000Z"),
-    views: 80,
-  },
-];
-
-const numQuestions = questions.length;
-
-export default function Home() {
+export default async function Home() {
+  const result = await getAllQuestions({});
+  console.log(result.questions);
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -110,8 +39,8 @@ export default function Home() {
       </div>
       <HomeFilter />
       <div className="mt-10 flex w-full flex-col gap-6">
-        {numQuestions > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}

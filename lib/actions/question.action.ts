@@ -3,8 +3,29 @@
 import Question from "@/database/question.model";
 import { connectToDatabase } from "../createDatabase";
 import Tag from "@/database/tag.model";
+import { CreateQuestionParams, GetQuestionByIdParams } from "./shared.types";
+import User from "@/database/user.model";
+import { revalidatePath } from "next/cache";
 
-export async function createQuestion(params: any) {
+export async function getAllQuestions(params: GetQuestionByIdParams) {
+  try {
+    connectToDatabase();
+
+    const questions = await Question.find({})
+      .populate({
+        path: "tags",
+        model: Tag,
+      })
+      .populate({ path: "author", model: User })
+      .sort({ createdAt: -1 });
+
+    return { questions };
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function createQuestion(params: CreateQuestionParams) {
   try {
     connectToDatabase();
     const { title, content, tags, author, path } = params;
@@ -30,5 +51,7 @@ export async function createQuestion(params: any) {
     await Question.findByIdAndUpdate(question._id, {
       $push: { tags: { $each: tagDocuments } },
     });
+
+    revalidatePath(path);
   } catch {}
 }
