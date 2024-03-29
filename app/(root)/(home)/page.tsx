@@ -26,7 +26,7 @@ export default async function Home() {
           route="/"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
-          placeholder="Search for questions"
+          placeholder="Search for questions..."
           otherClasses="flex-1"
         />
 
