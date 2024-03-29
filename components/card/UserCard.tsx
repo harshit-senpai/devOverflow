@@ -1,10 +1,10 @@
-import { getTopInteractedTags } from "@/lib/actions/tag.action";
-import Image from "next/image";
 import Link from "next/link";
-import Tag from "../shared/Tag";
-import { Badge } from "../ui/badge";
+import Image from "next/image";
 
-interface props {
+import { Badge } from "@/components/ui/badge";
+import Tag from "@/components/shared/Tag";
+
+interface Props {
   user: {
     _id: string;
     clerkId: string;
@@ -14,13 +14,8 @@ interface props {
   };
 }
 
-const UserCard = async ({ user }: props) => {
-  const interactedTags:
-    | {
-        _id: string;
-        name: string;
-      }[]
-    | undefined = await getTopInteractedTags({ userId: user._id });
+const UserCard = async ({ user }: Props) => {
+  const interactedTags: any = [];
 
   return (
     <Link
@@ -30,12 +25,12 @@ const UserCard = async ({ user }: props) => {
       <article className="background-light900_dark200 light-border flex w-full flex-col items-center justify-center rounded-2xl border p-8">
         <Image
           src={user.picture}
-          alt="user profile picture"
+          alt="User profile picture"
           width={100}
           height={100}
           className="rounded-full"
         />
-        <div className=" mt-4 text-center">
+        <div className="mt-4 text-center">
           <h3 className="h3-bold text-dark200_light900 line-clamp-1">
             {user.name}
           </h3>
@@ -43,10 +38,11 @@ const UserCard = async ({ user }: props) => {
             @{user.username}
           </p>
         </div>
+
         <div className="mt-5">
           {interactedTags.length > 0 ? (
             <div className="flex items-center gap-2">
-              {interactedTags.map((tag) => (
+              {interactedTags.map((tag: any) => (
                 <Tag key={tag._id} _id={tag._id} name={tag.name} />
               ))}
             </div>
