@@ -111,7 +111,7 @@ const Question = ({ user }: Props) => {
               <FormControl className="mt-3.5">
                 <Input
                   className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
-                  placeholder="shadcn"
+                  placeholder="Title of question"
                   {...field}
                 />
               </FormControl>
