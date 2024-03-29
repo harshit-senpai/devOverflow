@@ -14,6 +14,7 @@ import Question from "@/database/question.model";
 export async function getAllUsers(params: GetAllUsersParams) {
   try {
     // const { page = 1, pageSize = 20, filter, searchQuery } = params;
+    connectToDatabase();
 
     const users = await User.find({}).sort({ createdAt: -1 });
 
