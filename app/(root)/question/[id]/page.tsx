@@ -78,7 +78,7 @@ const Page = async ({ params }: URLProps) => {
       </div>
 
       <AllAnswers
-        questionId={JSON.stringify(result._id)}
+        questionId={result._id}
         userId={JSON.stringify(user._id)}
         totalAnswers={result.answers.length}
       />

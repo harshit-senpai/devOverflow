@@ -22,10 +22,16 @@ const AllAnswers = async ({ questionId, userId, totalAnswers }: Props) => {
         </h3>
         <Filter filters={AnswerFilters} />
       </div>
-
-      {/* <div>
+{/* 
+      <div>
         {
-            result.answers.map()
+            result.answers.map((answer) => (
+              <article key={answer._id} className="light-border border-b py-10">
+                <div className="flex items-center justify-between">
+                  
+                </div>
+              </article>
+            ))
         }
       </div> */}
     </div>
