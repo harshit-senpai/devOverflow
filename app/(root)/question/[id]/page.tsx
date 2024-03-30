@@ -1,12 +1,14 @@
+import Answer from "@/components/form/Answer";
 import Metric from "@/components/shared/Metric";
 import ParseHTML from "@/components/shared/ParseHTML";
 import Tag from "@/components/shared/Tag";
 import { getQuestionById } from "@/lib/actions/question.action";
+import { URLProps } from "@/types";
 import { formatNumber, getTimeStamp } from "@/utils/util";
 import Image from "next/image";
 import Link from "next/link";
 
-const Page = async ({ params }) => {
+const Page = async ({ params }: URLProps) => {
   const result = await getQuestionById({ questionId: params.id });
   return (
     <>
@@ -64,6 +66,8 @@ const Page = async ({ params }) => {
           <Tag key={tag._id} _id={tag._id} name={tag.name} showCount={false} />
         ))}
       </div>
+
+      <Answer />
     </>
   );
 };
