@@ -1,5 +1,6 @@
 import Metric from "@/components/shared/Metric";
 import ParseHTML from "@/components/shared/ParseHTML";
+import Tag from "@/components/shared/Tag";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { formatNumber, getTimeStamp } from "@/utils/util";
 import Image from "next/image";
@@ -56,7 +57,13 @@ const Page = async ({ params }) => {
         />
       </div>
 
-      <ParseHTML data={result.content}/>
+      <ParseHTML data={result.content} />
+
+      <div className="mt-8 flex flex-wrap gap-2">
+        {result.tags.map((tag: any) => (
+          <Tag key={tag._id} _id={tag._id} name={tag.name} showCount={false} />
+        ))}
+      </div>
     </>
   );
 };
