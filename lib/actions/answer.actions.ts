@@ -5,20 +5,22 @@ import { connectToDatabase } from "../createDatabase";
 import { CreateAnswerParams, GetAnswersParams } from "./shared.types";
 import Question from "@/database/question.model";
 import { revalidatePath } from "next/cache";
+import User from "@/database/user.model";
 
 export async function createAnswer(params: CreateAnswerParams) {
   try {
     connectToDatabase();
 
-    const { content, author, question, path } = params;
+    const { content, author, questions, path } = params;
 
-    const newAnswer = await Answer.create({ content, author, question });
+    const newAnswer = await Answer.create({ content, author, questions });
 
-    // adding answer ti the question's answers array
-
-    await Question.findByIdAndUpdate(question, {
+    // Add the answer to the question's answers array
+    await Question.findByIdAndUpdate(questions, {
       $push: { answers: newAnswer._id },
     });
+
+    // TODO: Add interaction...
 
     revalidatePath(path);
   } catch (error) {
@@ -33,8 +35,12 @@ export async function getAnswers(params: GetAnswersParams) {
 
     const { questionId } = params;
 
-    const answers = await Answer.find({ question: questionId })
-      .populate("author", "_id clerkId name picture ")
+    const answers = await Answer.find({ questions: questionId })
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id clerkId picture name",
+      })
       .sort({ createdAt: -1 });
 
     return { answers };

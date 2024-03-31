@@ -15,7 +15,7 @@ const AnswerSchema = new Schema({
     ref: "User",
     required: true,
   },
-  questions: {
+  question: {
     type: Schema.Types.ObjectId,
     ref: "Question",
     required: true,
@@ -38,7 +38,7 @@ const AnswerSchema = new Schema({
   ],
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
 });
 
