@@ -21,7 +21,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
   } else {
-    redirect("/login");
+    redirect("/sign-in");
   }
 
   return (
