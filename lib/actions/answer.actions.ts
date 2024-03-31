@@ -11,12 +11,12 @@ export async function createAnswer(params: CreateAnswerParams) {
   try {
     connectToDatabase();
 
-    const { content, author, questions, path } = params;
+    const { content, author, question, path } = params;
 
-    const newAnswer = await Answer.create({ content, author, questions });
+    const newAnswer = await Answer.create({ content, author, question });
 
     // Add the answer to the question's answers array
-    await Question.findByIdAndUpdate(questions, {
+    await Question.findByIdAndUpdate(question, {
       $push: { answers: newAnswer._id },
     });
 
@@ -35,7 +35,7 @@ export async function getAnswers(params: GetAnswersParams) {
 
     const { questionId } = params;
 
-    const answers = await Answer.find({ questions: questionId })
+    const answers = await Answer.find({ question: questionId })
       .populate({
         path: "author",
         model: User,
