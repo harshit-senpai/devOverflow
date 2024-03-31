@@ -6,12 +6,13 @@ import Tag from "@/components/shared/Tag";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
 import { URLProps } from "@/types";
-import { formatNumber, getTimeStamp } from "@/utils/util";
+import { getTimeStamp } from "@/utils/util";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-const Page = async ({ params, searchParams }: any) => {
+const Page = async ({ params, searchParams }: URLProps) => {
   const result = await getQuestionById({ questionId: params.id });
   const { userId: clerkId } = auth();
 
@@ -19,6 +20,8 @@ const Page = async ({ params, searchParams }: any) => {
 
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
+  } else {
+    redirect("/login");
   }
 
   return (
