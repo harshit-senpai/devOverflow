@@ -8,14 +8,13 @@ import { auth } from "@clerk/nextjs";
 
 const Page = async () => {
   const { userId } = auth();
-
   if (!userId) {
     return null;
   }
-  const result = await getSavedQuestions({
+  const result: {questions: any[]} = await getSavedQuestions({
     clerkId: userId,
-  });
-
+  }) || { questions: []};
+  
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
