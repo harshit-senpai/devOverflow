@@ -1,5 +1,6 @@
 "use client";
 
+import { downvoteAnswer, upvoteAnswer } from "@/lib/actions/answer.actions";
 import {
   downvoteQuestion,
   upvoteQuestion,
@@ -50,6 +51,15 @@ const Votes = ({
           path: pathName,
         });
       }
+      if (type === "Answer") {
+        await upvoteAnswer({
+          answerId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathName,
+        });
+      }
       return;
     }
 
@@ -57,6 +67,15 @@ const Votes = ({
       if (type === "Question") {
         await downvoteQuestion({
           questionId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathName,
+        });
+      }
+      if (type === "Answer") {
+        await downvoteAnswer({
+          answerId: JSON.parse(itemId),
           userId: JSON.parse(userId),
           hasupVoted,
           hasdownVoted,
@@ -110,18 +129,20 @@ const Votes = ({
           </div>
         </div>
       </div>
-      <Image
-        src={
-          hasSaved
-            ? "/assets/icons/star-filled.svg"
-            : "/assets/icons/star-red.svg"
-        }
-        width={18}
-        height={18}
-        alt="star"
-        className="cursor-pointer"
-        onClick={() => {}}
-      />
+      {type === "Question" && (
+        <Image
+          src={
+            hasSaved
+              ? "/assets/icons/star-filled.svg"
+              : "/assets/icons/star-red.svg"
+          }
+          width={18}
+          height={18}
+          alt="star"
+          className="cursor-pointer"
+          onClick={() => {}}
+        />
+      )}
     </div>
   );
 };
