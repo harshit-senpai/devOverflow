@@ -1,15 +1,20 @@
 import QuestionCard from "@/components/card/QuestionCard";
-import UserCard from "@/components/card/UserCard";
 import Filter from "@/components/shared/Filter";
 import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { UserFilters } from "@/constants/filters";
-import { getAllQuestions } from "@/lib/actions/question.action";
-import { getAllUsers } from "@/lib/actions/user.action";
-import Link from "next/link";
+import { getSavedQuestions } from "@/lib/actions/user.action";
+import { auth } from "@clerk/nextjs";
 
 const Page = async () => {
-  const result = await getAllQuestions();
+  const { userId } = auth();
+
+  if (!userId) {
+    return null;
+  }
+  const result = await getSavedQuestions({
+    clerkId: userId,
+  });
 
   return (
     <>
