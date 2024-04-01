@@ -73,14 +73,14 @@ const QuestionCard = ({
           imgUrl="/assets/icons/message.svg"
           alt="answers"
           title="Answers"
-          value={"100k"}
+          value={formatNumber(answers.length)}
           textStyles="small-medium text-dark400_light800"
         />
         <Metric
           imgUrl="/assets/icons/eye.svg"
           alt="views"
           title="views"
-          value={"100k"}
+          value={views || 0}
           textStyles="small-medium text-dark400_light800"
         />
       </div>

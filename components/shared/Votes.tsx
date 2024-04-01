@@ -112,7 +112,7 @@ const Votes = ({
             }}
           />
           <div className="flex-center background-light700_dark400 mion-w-[18px] rounded-sm p-1">
-            <p className="subtle-medium text-dark400_light900">0</p>
+            <p className="subtle-medium text-dark400_light900">{upvotes}</p>
           </div>
         </div>
 
@@ -132,7 +132,7 @@ const Votes = ({
             }}
           />
           <div className="flex-center background-light700_dark400 mion-w-[18px] rounded-sm p-1">
-            <p className="subtle-medium text-dark400_light900">0</p>
+            <p className="subtle-medium text-dark400_light900">{downvotes}</p>
           </div>
         </div>
       </div>
@@ -147,7 +147,9 @@ const Votes = ({
           height={18}
           alt="star"
           className="cursor-pointer"
-          onClick={() => {handleSave()}}
+          onClick={() => {
+            handleSave();
+          }}
         />
       )}
     </div>
