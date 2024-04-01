@@ -109,7 +109,7 @@ export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
 
     const isQuestionSaved = user.saved.includes(questionId);
 
-    if (!isQuestionSaved) {
+    if (isQuestionSaved) {
       await User.findByIdAndUpdate(
         userId,
         { $pull: { saved: questionId } },
