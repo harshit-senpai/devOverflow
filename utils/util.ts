@@ -36,14 +36,12 @@ export const getTimeStamp = (createdAt: Date): string => {
   return `${years} ${years === 1 ? "year" : "years"} ago`;
 };
 
-export const formatNumber = (num: number): string => {
-  if (num >= 1000000) {
-    const formattedNumber = (num / 1000000).toFixed(1);
-    return `${formattedNumber} M`;
+export const formatNumber = (number: number): string => {
+  if (number >= 1000000) {
+    return (number / 1000000).toFixed(1) + "M";
+  } else if (number >= 1000) {
+    return (number / 1000).toFixed(1) + "K";
+  } else {
+    return number.toString();
   }
-  if (num >= 1000) {
-    const formattedNumber = (num / 1000).toFixed(1);
-    return `${formattedNumber} K`;
-  }
-  return num.toString();
 };

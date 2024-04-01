@@ -9,8 +9,7 @@ import {
 import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { formatNumber } from "@/utils/util";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 interface Props {
@@ -100,7 +99,6 @@ const Votes = ({
       questionId: JSON.parse(itemId),
       userId: userId ? JSON.parse(userId) : undefined,
     });
-    alert("Viewed");
   }, [itemId, userId, pathName, router]);
 
   return (

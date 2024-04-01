@@ -77,7 +77,6 @@ export async function getQuestionById(params: GetQuestionByIdParams) {
         model: User,
         select: "_id clerkId picture name",
       });
-
     return question;
   } catch (error) {
     console.log(error);
