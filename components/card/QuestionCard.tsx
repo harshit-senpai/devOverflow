@@ -80,7 +80,7 @@ const QuestionCard = ({
           imgUrl="/assets/icons/eye.svg"
           alt="views"
           title="views"
-          value={views || 0}
+          value={formatNumber(views)}
           textStyles="small-medium text-dark400_light800"
         />
       </div>

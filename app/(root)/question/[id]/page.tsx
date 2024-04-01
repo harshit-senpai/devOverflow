@@ -79,7 +79,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
         <Metric
           imgUrl="/assets/icons/eye.svg"
           alt="eye"
-          value={result.views || 0}
+          value={formatNumber(result.view)}
           title=" Views"
           textStyles="small-medium text-dark400_light800"
         />
