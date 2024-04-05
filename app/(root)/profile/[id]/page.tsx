@@ -1,3 +1,4 @@
+import AnswersTab from "@/components/shared/AnswersTab";
 import ProfileLink from "@/components/shared/ProfileLink";
 import QuestionTab from "@/components/shared/QuestionTab";
 import Stats from "@/components/shared/Stats";
@@ -91,7 +92,13 @@ const Page = async ({ params, searchParams }: URLProps) => {
               clerkId={clerkId}
             />
           </TabsContent>
-          <TabsContent value="answers">ANSWERS</TabsContent>
+          <TabsContent value="answers" className="flex w-full flex-col gap-6">
+            <AnswersTab
+              clerkId={clerkId}
+              searchParams={searchParams}
+              userId={userInfo?.user._id}
+            />
+          </TabsContent>
         </Tabs>
       </div>
     </>
