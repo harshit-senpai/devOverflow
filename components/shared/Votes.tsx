@@ -94,12 +94,10 @@ const Votes = ({
     }
   };
 
-  useEffect(() => {
     viewQuestion({
       questionId: JSON.parse(itemId),
       userId: userId ? JSON.parse(userId) : undefined,
     });
-  }, [itemId, userId, pathName, router]);
 
   return (
     <div className="flex gap-5">
