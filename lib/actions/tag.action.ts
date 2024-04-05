@@ -11,6 +11,7 @@ import type {
 import console from "console";
 import { FilterQuery } from "mongoose";
 import Question from "@/database/question.model";
+import User from "@/database/user.model";
 
 export async function getAllTags(params: GetAllTagsParams) {
   try {
@@ -48,7 +49,7 @@ export async function getQuestionsByTagId(params: GetQuestionsByTagIdParams) {
       ],
     });
 
-    if(!tag) {
+    if (!tag) {
       throw new Error("Tag not found");
     }
 
