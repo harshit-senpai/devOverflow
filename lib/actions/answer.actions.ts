@@ -144,7 +144,6 @@ export async function deleteAnswers(params: DeleteAnswerParams) {
         },
       }
     );
-    await Answer.deleteMany({ question: questionId });
     await Interaction.deleteMany({ answer: answerId });
 
     revalidatePath(path);
