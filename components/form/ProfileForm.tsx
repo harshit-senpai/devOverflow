@@ -36,7 +36,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
     defaultValues: {
       name: parsedUser.name || "",
       username: parsedUser.username || "",
-      portfolioWebsite: parsedUser.portfolioWebsite || "",
+      portfoliowebsite: parsedUser.portfoliowebsite || "",
       location: parsedUser.location || "",
       bio: parsedUser.bio || "",
     },
@@ -51,7 +51,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
         updateData: {
           name: values.name,
           username: values.username,
-          portfolioWebsite: values.portfolioWebsite,
+          portfoliowebsite: values.portfoliowebsite,
           location: values.location,
           bio: values.bio,
         },
@@ -111,7 +111,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
         />
         <FormField
           control={form.control}
-          name="portfolioWebsite"
+          name="portfoliowebsite"
           render={({ field }) => (
             <FormItem className="space-y-3.5">
               <FormLabel className="paragraph-semibold text-dark400_light800">
