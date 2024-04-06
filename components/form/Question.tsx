@@ -32,7 +32,7 @@ interface Props {
 
 const Question = ({ type, user, questionDetails }: Props) => {
   const parsedQuestionDetails = JSON.parse(questionDetails || "");
-  const groupedTags = parsedQuestionDetails.tags.map((tag) => tag.name);
+  const groupedTags = parsedQuestionDetails.tags.map((tag: any) => tag.name);
 
   const { mode } = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
