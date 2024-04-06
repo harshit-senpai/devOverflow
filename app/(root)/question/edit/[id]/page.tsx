@@ -18,7 +18,7 @@ const page = async ({ params }: ParamsProps) => {
       <div className="mt-9">
         <Question
           type="edit"
-          mongoUserId={mongoUser._id}
+          user={mongoUser._id}
           questionDetails={JSON.stringify(result)}
         />
       </div>

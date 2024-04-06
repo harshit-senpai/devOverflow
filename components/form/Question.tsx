@@ -24,13 +24,16 @@ import { createQuestion } from "@/lib/actions/question.action";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
 
-const type: any = "create";
-
 interface Props {
+  type?: string;
   user: string;
+  questionDetails?: string;
 }
 
-const Question = ({ user }: Props) => {
+const Question = ({ type, user, questionDetails }: Props) => {
+  const parsedQuestionDetails = JSON.parse(questionDetails || "");
+  const groupedTags = parsedQuestionDetails.tags.map((tag) => tag.name);
+
   const { mode } = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const Router = useRouter();
@@ -72,9 +75,9 @@ const Question = ({ user }: Props) => {
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
     defaultValues: {
-      title: "",
-      explanation: "",
-      tags: [],
+      title: parsedQuestionDetails.title || "",
+      explanation: parsedQuestionDetails.content || "",
+      tags: groupedTags || [],
     },
   });
 
@@ -144,7 +147,7 @@ const Question = ({ user }: Props) => {
                     }}
                     onBlur={field.onBlur}
                     onEditorChange={(content) => field.onChange(content)}
-                    initialValue=""
+                    initialValue={parsedQuestionDetails.content || ""}
                     init={{
                       height: 350,
                       menubar: false,
