@@ -3,6 +3,8 @@ import React from "react";
 import Tag from "../shared/Tag";
 import Metric from "../shared/Metric";
 import { formatNumber, getTimeStamp } from "@/utils/util";
+import { SignedIn } from "@clerk/nextjs";
+import EditDeleteAction from "../shared/EditDeleteAction";
 
 interface QuestionProps {
   _id: string;
@@ -12,7 +14,7 @@ interface QuestionProps {
     name: string;
   }[];
   author: {
-    _id: string;
+    clerkId: string;
     name: string;
     picture: string;
   };
@@ -34,6 +36,7 @@ const QuestionCard = ({
   answers,
   createdAt,
 }: QuestionProps) => {
+  const showActionsButtons = clerkId && clerkId === author?.clerkId;
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
@@ -47,6 +50,12 @@ const QuestionCard = ({
             </h3>
           </Link>
         </div>
+
+        <SignedIn>
+          {showActionsButtons && (
+            <EditDeleteAction type="Question" itemId={JSON.stringify(_id)} />
+          )}
+        </SignedIn>
       </div>
       <div className="mt-3.5 flex flex-wrap gap-2">
         {tags.map((tag) => (
@@ -60,7 +69,7 @@ const QuestionCard = ({
           alt="user"
           title={` - asked ${getTimeStamp(createdAt)}`}
           value={author.name}
-          href={`/profile/${author._id}`}
+          href={`/profile/${author.clerkId}`}
           isAuthor
           textStyles="body-medium text-dark400_light700"
         />

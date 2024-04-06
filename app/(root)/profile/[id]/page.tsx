@@ -34,7 +34,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
             </p>
 
             <div className="mt-5 flex flex-wrap items-center justify-start gap-5">
-              {userInfo?.user.portfolioWebsite && (
+              {userInfo?.user.portfoliowebsite && (
                 <ProfileLink
                   title="Portfolio"
                   imgUrl="/assets/icons/link.svg"
@@ -43,7 +43,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
               )}
               {userInfo?.user.location && (
                 <ProfileLink
-                  title="location"
+                  title={userInfo.user.location}
                   imgUrl="/assets/icons/location.svg"
                 />
               )}
