@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
 import { QuestionsSchema } from "@/utils/validations";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
-import { createQuestion } from "@/lib/actions/question.action";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
 
@@ -85,13 +85,22 @@ const Question = ({ type, user, questionDetails }: Props) => {
   async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
     try {
-      await createQuestion({
-        title: values.title,
-        content: values.explanation,
-        tags: values.tags,
-        author: JSON.parse(user),
-        path: pathName,
-      });
+      if (type === "edit") {
+        await editQuestion({
+          questionId: parsedQuestionDetails._id,
+          title: values.title,
+          content: values.explanation,
+          path: pathName,
+        });
+      } else {
+        await createQuestion({
+          title: values.title,
+          content: values.explanation,
+          tags: values.tags,
+          author: JSON.parse(user),
+          path: pathName,
+        });
+      }
 
       Router.push("/");
     } catch (error) {
