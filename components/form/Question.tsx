@@ -202,6 +202,7 @@ const Question = ({ type, user, questionDetails }: Props) => {
                   <Input
                     className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light900 min-h-[56px] border"
                     placeholder="Add Tags..."
+                    disabled={type === "edit"}
                     onKeyDown={(e) => handleInputKeyDown(e, field)}
                   />
                   {field.value.length > 0 && (
@@ -210,16 +211,22 @@ const Question = ({ type, user, questionDetails }: Props) => {
                         <Badge
                           key={tag}
                           className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2 capitalize"
-                          onClick={() => handleTagRemove(tag, field)}
+                          onClick={() => {
+                            type !== "edit"
+                              ? handleTagRemove(tag, field)
+                              : () => {};
+                          }}
                         >
                           {tag}
-                          <Image
-                            src="/assets/icons/close.svg"
-                            alt="close icon"
-                            width={12}
-                            height={12}
-                            className="cursor-pointer object-contain invert-0 dark:invert"
-                          />
+                          {type !== "edit" && (
+                            <Image
+                              src="/assets/icons/close.svg"
+                              alt="close icon"
+                              width={12}
+                              height={12}
+                              className="cursor-pointer object-contain invert-0 dark:invert"
+                            />
+                          )}
                         </Badge>
                       ))}
                     </div>
