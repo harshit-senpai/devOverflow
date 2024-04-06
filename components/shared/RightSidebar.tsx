@@ -2,30 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Tag from "./Tag";
-
-const hotQuestion = [
-  {
-    _id: "1",
-    title: "How do I use express as a custom server in Next.js",
-  },
-  {
-    _id: "2",
-    title: "Async/Await Function Not Handling Errors Properly",
-  },
-  {
-    _id: "3",
-    title: "Next JS router",
-  },
-  {
-    _id: "4",
-    title: "How can I get (query string) parameters from the URL in Next.js?",
-  },
-  {
-    _id: "5",
-    title:
-      "What is the best modern tech stack we can use to create a Stackoverflow clone?",
-  },
-];
+import { getHotQuestions } from "@/lib/actions/question.action";
 
 const popularTags = [
   {
@@ -55,15 +32,16 @@ const popularTags = [
   },
 ];
 
-const RightSidebar = () => {
+const RightSidebar = async () => {
+  const hotQuestions = await getHotQuestions();
   return (
     <section className="background-light900_dark200 light-border custom-scrollbar sticky right-0 top-0 flex h-screen flex-col overflow-y-auto border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden lg:w-[350px]">
       <div>
         <h3 className="h3-bold text-dark200_light900">Top Questions</h3>
         <div className="mt-7 flex w-full flex-col gap-[30px]">
-          {hotQuestion.map((question) => (
+          {hotQuestions.map((question) => (
             <Link
-              href="/question"
+              href={`/question/${question._id}`}
               key={question._id}
               className="flex cursor-pointer items-center justify-between gap-7"
             >
