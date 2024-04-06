@@ -3,37 +3,11 @@ import Link from "next/link";
 import React from "react";
 import Tag from "./Tag";
 import { getHotQuestions } from "@/lib/actions/question.action";
-
-const popularTags = [
-  {
-    _id: "1",
-    name: "React",
-    totalQuestions: 1,
-  },
-  {
-    _id: "2",
-    name: "Javascript",
-    totalQuestions: 2,
-  },
-  {
-    _id: "3",
-    name: "Next.js",
-    totalQuestions: 4,
-  },
-  {
-    _id: "4",
-    name: "Tailwindcss",
-    totalQuestions: 9,
-  },
-  {
-    _id: "5",
-    name: "Prisma",
-    totalQuestions: 10,
-  },
-];
+import { getTopPopularTags } from "@/lib/actions/tag.action";
 
 const RightSidebar = async () => {
   const hotQuestions = await getHotQuestions();
+  const popularTags = await getTopPopularTags();
   return (
     <section className="background-light900_dark200 light-border custom-scrollbar sticky right-0 top-0 flex h-screen flex-col overflow-y-auto border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden lg:w-[350px]">
       <div>
@@ -67,7 +41,7 @@ const RightSidebar = async () => {
               _id={tag._id}
               key={tag._id}
               name={tag.name}
-              totalQuestions={tag.totalQuestions}
+              totalQuestions={tag.numberOfQuestions}
               showCount={true}
             />
           ))}
