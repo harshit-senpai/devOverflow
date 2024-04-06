@@ -31,8 +31,8 @@ interface Props {
 }
 
 const Question = ({ type, user, questionDetails }: Props) => {
-  const parsedQuestionDetails = JSON.parse(questionDetails || "");
-  const groupedTags = parsedQuestionDetails.tags.map((tag: any) => tag.name);
+  const parsedQuestionDetails = questionDetails && JSON.parse(questionDetails || "");
+  const groupedTags = parsedQuestionDetails?.tags.map((tag: any) => tag.name);
 
   const { mode } = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -75,8 +75,8 @@ const Question = ({ type, user, questionDetails }: Props) => {
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
     defaultValues: {
-      title: parsedQuestionDetails.title || "",
-      explanation: parsedQuestionDetails.content || "",
+      title: parsedQuestionDetails?.title || "",
+      explanation: parsedQuestionDetails?.content || "",
       tags: groupedTags || [],
     },
   });
@@ -143,7 +143,7 @@ const Question = ({ type, user, questionDetails }: Props) => {
           render={({ field }) => (
             <FormItem className="flex w-full flex-col gap-3">
               <FormLabel className="paragraph-semibol text-dark400_light800">
-                Detailed Explanation of your Problem{" "}
+                Detailed Explanation of your Problem
                 <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl className="mt-3.5">
@@ -156,7 +156,7 @@ const Question = ({ type, user, questionDetails }: Props) => {
                     }}
                     onBlur={field.onBlur}
                     onEditorChange={(content) => field.onChange(content)}
-                    initialValue={parsedQuestionDetails.content || ""}
+                    initialValue={parsedQuestionDetails?.content || ""}
                     init={{
                       height: 350,
                       menubar: false,
