@@ -10,6 +10,7 @@ import { SearchParamsProps } from "@/types";
 const Page = async (searchParams: SearchParamsProps) => {
   const result = await getAllUsers({
     searchQuery: searchParams.searchParams.q,
+    filter: searchParams.searchParams.filter,
   });
 
   return (
