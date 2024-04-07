@@ -1,3 +1,11 @@
+import qs from "query-string";
+
+interface UrlQueryParams {
+  params: string;
+  key: string;
+  value: string | null;
+}
+
 export const getTimeStamp = (createdAt: Date): string => {
   const now = new Date();
   const timeDiff = now.getTime() - createdAt.getTime();
@@ -53,4 +61,18 @@ export const getJoinedDate = (date: Date): string => {
   const joinedDate = `${month} ${year}`;
 
   return joinedDate;
+};
+
+export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
+  const currentUrl = qs.parse(params);
+
+  currentUrl[key] = value;
+
+  return qs.stringifyUrl(
+    {
+      url: window.location.pathname,
+      query: currentUrl,
+    },
+    { skipNull: true }
+  );
 };
