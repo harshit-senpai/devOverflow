@@ -39,7 +39,16 @@ const LocalSearchbar = ({
         });
 
         router.push(newUrl, { scroll: false });
+      } else {
+        if(pathname === route) {
+          const newUrl = removeKeysFromQuery(
+            params: searchParams.toString(),
+            keys: ['q']
+          )
+          router.push(newUrl, { scroll: false });
+        }
       }
+    } 
     }, 300);
     return () => clearTimeout(delayDebounceFn);
   }, [search, route, pathname, router, searchParams, query]);
