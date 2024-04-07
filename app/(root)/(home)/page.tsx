@@ -14,6 +14,7 @@ export default async function Home(searchParams: SearchParamsProps) {
   const result = await getAllQuestions({
     searchQuery: searchParams.searchParams.q,
     filter: searchParams.searchParams.filter,
+    page: searchParams.searchParams.page ? +searchParams.searchParams.page : 1,
   });
   return (
     <>
