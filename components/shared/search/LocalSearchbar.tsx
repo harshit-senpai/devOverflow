@@ -37,8 +37,11 @@ const LocalSearchbar = ({
           key: "q",
           value: search,
         });
+
+        router.push(newUrl, { scroll: false });
       }
     }, 300);
+    return () => clearTimeout(delayDebounceFn);
   }, [search, route, pathname, router, searchParams, query]);
   return (
     <div
