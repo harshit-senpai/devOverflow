@@ -5,8 +5,12 @@ import { UserFilters } from "@/constants/filters";
 import { getAllUsers } from "@/lib/actions/user.action";
 import Link from "next/link";
 
-const Page = async () => {
-  const result = await getAllUsers({});
+import { SearchParamsProps } from "@/types";
+
+const Page = async (searchParams: SearchParamsProps) => {
+  const result = await getAllUsers({
+    searchQuery: searchParams.searchParams.q,
+  });
 
   return (
     <>

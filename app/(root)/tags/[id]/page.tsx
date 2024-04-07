@@ -10,7 +10,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
     page: 1,
     searchQuery: searchParams.q,
   });
-  if(!result) {
+  if (!result) {
     throw new Error("No tag Questions found");
   }
   return (
@@ -19,7 +19,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
 
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearchbar
-          route="/community"
+          route={`/tags/${params.id}`}
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
           placeholder="Search for tag questions...."
