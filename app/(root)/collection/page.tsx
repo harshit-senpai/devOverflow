@@ -2,7 +2,7 @@ import QuestionCard from "@/components/card/QuestionCard";
 import Filter from "@/components/shared/Filter";
 import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
-import { UserFilters } from "@/constants/filters";
+import { QuestionFilters, UserFilters } from "@/constants/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs";
@@ -15,8 +15,10 @@ const Page = async (searchParams: SearchParamsProps) => {
   const result: { questions: any[] } = (await getSavedQuestions({
     clerkId: userId,
     searchQuery: searchParams.searchParams.q,
+    filter: searchParams.searchParams.filter,
   })) || { questions: [] };
 
+  console.log(result);
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
@@ -26,12 +28,12 @@ const Page = async (searchParams: SearchParamsProps) => {
           route="/collection"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
-          placeholder="Search for great minds...."
+          placeholder="Search for saved questions...."
           otherClasses="flex-1"
         />
 
         <Filter
-          filters={UserFilters}
+          filters={QuestionFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
         />
       </div>
