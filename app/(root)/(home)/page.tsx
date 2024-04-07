@@ -5,7 +5,6 @@ import QuestionCard from "@/components/card/QuestionCard";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
-import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { getAllQuestions } from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
