@@ -8,9 +8,12 @@ import { HomePageFilters } from "@/constants/filters";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { getAllQuestions } from "@/lib/actions/question.action";
+import { SearchParamsProps } from "@/types";
 
-export default async function Home() {
-  const result = await getAllQuestions();
+export default async function Home(searchParams: SearchParamsProps) {
+  const result = await getAllQuestions({
+    searchQuery: searchParams.searchParams.q
+  });
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">

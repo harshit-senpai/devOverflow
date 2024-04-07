@@ -8,7 +8,7 @@ interface UrlQueryParams {
 
 interface RemoveUrlQueryParams {
   params: string;
-  keyToRemove: string[];
+  keysToRemove: string[];
 }
 
 export const getTimeStamp = (createdAt: Date): string => {
@@ -70,7 +70,6 @@ export const getJoinedDate = (date: Date): string => {
 
 export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
   const currentUrl = qs.parse(params);
-
   currentUrl[key] = value;
 
   return qs.stringifyUrl(
@@ -78,14 +77,19 @@ export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
       url: window.location.pathname,
       query: currentUrl,
     },
-    { skipNull: true }
+    {
+      skipNull: true,
+    }
   );
 };
 
-export const removeKeysFromQuery = ({ params, keyToRemove }: RemoveUrlQueryParams) => {
+export const removeKeysFromQuery = ({
+  params,
+  keysToRemove,
+}: RemoveUrlQueryParams) => {
   const currentUrl = qs.parse(params);
 
-  keyToRemove.forEach((key) => {
+  keysToRemove.forEach((key) => {
     delete currentUrl[key];
   });
 
@@ -94,6 +98,8 @@ export const removeKeysFromQuery = ({ params, keyToRemove }: RemoveUrlQueryParam
       url: window.location.pathname,
       query: currentUrl,
     },
-    { skipNull: true }
+    {
+      skipNull: true,
+    }
   );
 };

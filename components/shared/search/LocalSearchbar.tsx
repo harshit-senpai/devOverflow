@@ -37,20 +37,21 @@ const LocalSearchbar = ({
           key: "q",
           value: search,
         });
-
         router.push(newUrl, { scroll: false });
       } else {
-        if(pathname === route) {
+        if (pathname === route) {
           const newUrl = removeKeysFromQuery({
             params: searchParams.toString(),
-            keyToRemove: ['q']
-        })
+            keysToRemove: ["q"],
+          });
           router.push(newUrl, { scroll: false });
         }
-      } 
+      }
     }, 300);
+
     return () => clearTimeout(delayDebounceFn);
-  }, [search, route, pathname, router, searchParams, query]);
+  }, [search, route, pathname, searchParams, query, router]);
+
   return (
     <div
       className={`background-light800_darkgradient flex min-h-[56px] grow items-center gap-4 rounded-[10px] px-4 ${otherClasses}`}
