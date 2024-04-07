@@ -12,18 +12,18 @@ const Page = async (searchParams: SearchParamsProps) => {
   if (!userId) {
     return null;
   }
-  const result: {questions: any[]} = await getSavedQuestions({
+  const result: { questions: any[] } = (await getSavedQuestions({
     clerkId: userId,
     searchQuery: searchParams.searchParams.q,
-  }) || { questions: []};
-  
+  })) || { questions: [] };
+
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
 
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearchbar
-          route="/community"
+          route="/collection"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
           placeholder="Search for great minds...."
