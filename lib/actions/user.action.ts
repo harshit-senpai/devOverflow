@@ -20,9 +20,25 @@ import Answer from "@/database/answer.model";
 export async function getAllUsers(params: GetAllUsersParams) {
   try {
     connectToDatabase();
-    const { searchQuery } = params;
+    const { searchQuery, filter } = params;
 
     const query: FilterQuery<typeof User> = {};
+
+    let searchOption = {};
+
+    switch (filter) {
+      case "new_users":
+        searchOption = { joinedAt: -1 };
+        break;
+      case "old_users":
+        searchOption = { joinedAt: 1 };
+        break;
+      case "top_contributor":
+        searchOption = { reputation: -1 };
+        break;
+      default:
+        break;
+    }
 
     if (searchQuery) {
       query.$or = [
@@ -31,7 +47,7 @@ export async function getAllUsers(params: GetAllUsersParams) {
       ];
     }
 
-    const users = await User.find(query).sort({ createdAt: -1 });
+    const users = await User.find(query).sort(searchOption);
 
     return { users };
   } catch (error) {
@@ -147,7 +163,7 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
   try {
     connectToDatabase();
 
-    const { clerkId,searchQuery } = params;
+    const { clerkId, searchQuery } = params;
 
     const query: FilterQuery<typeof Question> = searchQuery
       ? { title: { $regex: new RegExp(searchQuery, "i") } }
