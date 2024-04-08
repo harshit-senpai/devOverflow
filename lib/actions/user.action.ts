@@ -285,15 +285,20 @@ export async function getUserAnswers(params: GetUserStatsParams) {
     connectToDatabase();
 
     const { userId, page = 1, pageSize = 10 } = params;
+    const skipAmount = (page - 1) * pageSize;
 
     const totalAnswers = await Answer.countDocuments({ author: userId });
 
     const userAnswers = await Answer.find({ author: userId })
       .sort({ upvotes: -1 })
       .populate("question", "_id name")
-      .populate("author", "_id clerkId name picture");
+      .populate("author", "_id clerkId name picture")
+      .skip(skipAmount)
+      .limit(pageSize);
 
-    return { totalAnswers, answers: userAnswers };
+    const isNextAnswer = totalAnswers > skipAmount + userAnswers.length;
+
+    return { totalAnswers, answers: userAnswers, isNextAnswer };
   } catch (error) {
     console.log(error);
     throw error;
