@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const GlobalResult = () => {
   const searchParams = useSearchParams();
@@ -27,6 +28,10 @@ const GlobalResult = () => {
     };
   }, [global, type]);
 
+  const renderLink = (type: string, id: string) => {
+    return "/";
+  };
+
   return (
     <div className="absolute top-full z-10 mt-3 w-full bg-light-800 py-5 shadow-sm dark:bg-dark-400 rounded-xl ">
       <p className="text-dark400_light900 paragraph-semibold px-5">Filters</p>
@@ -44,7 +49,22 @@ const GlobalResult = () => {
             </p>
           </div>
         ) : (
-          <div>Content</div>
+          <div className="flex flex-col gap-2">
+            {result.length > 0 ? (
+              result.map((item: any, index: number) => (
+                <Link
+                  href={renderLink("type", "id")}
+                  key={item.type + item.id + index}
+                ></Link>
+              ))
+            ) : (
+              <div className="flex-center flex-col px-5">
+                <p className="text-dark200_light800 body-regular px-5 py-2.5">
+                  No, results found
+                </p>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>
