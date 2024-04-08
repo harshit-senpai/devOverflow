@@ -20,7 +20,9 @@ import Answer from "@/database/answer.model";
 export async function getAllUsers(params: GetAllUsersParams) {
   try {
     connectToDatabase();
-    const { searchQuery, filter } = params;
+    const { searchQuery, filter, page = 1, pageSize = 10 } = params;
+
+    const skipAmount = (page - 1) * pageSize;
 
     const query: FilterQuery<typeof User> = {};
 
@@ -47,9 +49,15 @@ export async function getAllUsers(params: GetAllUsersParams) {
       ];
     }
 
-    const users = await User.find(query).sort(searchOption);
+    const users = await User.find(query)
+      .sort(searchOption)
+      .skip(skipAmount)
+      .limit(pageSize);
 
-    return { users };
+    const totalUsers = await User.countDocuments(query);
+    const isNext = totalUsers > 0 + users.length;
+
+    return { users, isNext };
   } catch (error) {
     console.log(error);
     throw error;
