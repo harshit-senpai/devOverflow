@@ -1,11 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { useSearchParams } from "next/navigation";
 
 const GlobalResult = () => {
+  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState([]);
+
+  const global = searchParams.get("global");
+  const type = searchParams.get("type");
+
+  useEffect(() => {
+    const fetchResult = async () => {
+      setResult([]);
+      setIsLoading(true);
+
+      try {
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+  }, [global, type]);
+
   return (
     <div className="absolute top-full z-10 mt-3 w-full bg-light-800 py-5 shadow-sm dark:bg-dark-400 rounded-xl ">
       <p className="text-dark400_light900 paragraph-semibold px-5">Filters</p>
