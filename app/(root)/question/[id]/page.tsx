@@ -1,6 +1,7 @@
 import Answer from "@/components/form/Answer";
 import AllAnswers from "@/components/shared/AllAnswers";
 import Metric from "@/components/shared/Metric";
+import Pagination from "@/components/shared/Pagination";
 import ParseHTML from "@/components/shared/ParseHTML";
 import Tag from "@/components/shared/Tag";
 import Votes from "@/components/shared/Votes";
