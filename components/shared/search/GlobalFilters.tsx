@@ -1,6 +1,5 @@
 import { GlobalSearchFilters } from "@/constants/filters";
 import { formUrlQuery } from "@/utils/util";
-import { Item } from "@radix-ui/react-menubar";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
