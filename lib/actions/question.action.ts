@@ -203,6 +203,10 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
       $inc: { reputation: hasupVoted ? -1 : 1 },
     });
 
+    await User.findByIdAndUpdate(question.author, { 
+      $inc: { reputation: hasupVoted ? -10 : 10}
+    })
+
     revalidatePath(path);
   } catch (error) {
     console.log(error);
