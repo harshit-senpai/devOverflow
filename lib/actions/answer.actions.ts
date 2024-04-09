@@ -22,11 +22,19 @@ export async function createAnswer(params: CreateAnswerParams) {
     const newAnswer = await Answer.create({ content, author, question });
 
     // Add the answer to the question's answers array
-    await Question.findByIdAndUpdate(question, {
+    const questionObject = await Question.findByIdAndUpdate(question, {
       $push: { answers: newAnswer._id },
     });
 
-    // TODO: Add interaction...
+    await Interaction.create({
+      user: author,
+      action: "answer",
+      question,
+      answer: newAnswer._id,
+      tags: questionObject.tags,
+    });
+
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 10 } });
 
     revalidatePath(path);
   } catch (error) {
