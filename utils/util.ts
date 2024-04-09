@@ -1,3 +1,5 @@
+import { BADGE_CRITERIA } from "@/constants";
+import { BadgeCounts } from "@/types";
 import qs from "query-string";
 
 interface UrlQueryParams {
@@ -9,6 +11,13 @@ interface UrlQueryParams {
 interface RemoveUrlQueryParams {
   params: string;
   keysToRemove: string[];
+}
+
+interface BadgeParams {
+  criteria: {
+    type: keyof typeof BADGE_CRITERIA;
+    count: number;
+  }[];
 }
 
 export const getTimeStamp = (createdAt: Date): string => {
@@ -102,4 +111,25 @@ export const removeKeysFromQuery = ({
       skipNull: true,
     }
   );
+};
+
+export const assignBadges = (params: BadgeParams) => {
+  const badgeCount: BadgeCounts = {
+    GOLD: 0,
+    SILVER: 0,
+    BRONZE: 0,
+  };
+
+  const { criteria } = params;
+
+  criteria.forEach((item) => {
+    const { type, count } = item;
+    const badgeLevels: any = BADGE_CRITERIA[type];
+
+    Object.keys(badgeLevels).forEach((level: any) => {
+      if (count >= badgeLevels[level]) {
+        badgeCount[level as keyof BadgeCounts] += 1;
+      }
+    });
+  });
 };
