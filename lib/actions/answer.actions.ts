@@ -117,6 +117,10 @@ export async function upvoteAnswer(params: AnswerVoteParams) {
       throw new Error("Answer not found");
     }
 
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasupVoted ? -2 : 2 },
+    });
+
     revalidatePath(path);
   } catch (error) {
     console.log(error);
