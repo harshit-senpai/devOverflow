@@ -114,7 +114,7 @@ export const removeKeysFromQuery = ({
 };
 
 export const assignBadges = (params: BadgeParams) => {
-  const badgeCount: BadgeCounts = {
+  const badgeCounts: BadgeCounts = {
     GOLD: 0,
     SILVER: 0,
     BRONZE: 0,
@@ -126,10 +126,13 @@ export const assignBadges = (params: BadgeParams) => {
     const { type, count } = item;
     const badgeLevels: any = BADGE_CRITERIA[type];
 
+    /// if the count exceeds the criteria then increase the number for that badge.
     Object.keys(badgeLevels).forEach((level: any) => {
       if (count >= badgeLevels[level]) {
-        badgeCount[level as keyof BadgeCounts] += 1;
+        badgeCounts[level as keyof BadgeCounts] += 1;
       }
     });
   });
+
+  return badgeCounts;
 };
