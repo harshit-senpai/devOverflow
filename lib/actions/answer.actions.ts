@@ -159,11 +159,11 @@ export async function downvoteAnswer(params: AnswerVoteParams) {
     }
 
     await User.findByIdAndUpdate(userId, {
-      $inc: { reputation: hasupVoted ? -2 : 2 },
+      $inc: { reputation: hasdownVoted ? -2 : 2 },
     });
 
     await User.findByIdAndUpdate(answer.author, {
-      $inc: { reputation: hasupVoted ? -10 : 10 },
+      $inc: { reputation: hasdownVoted ? -10 : 10 },
     });
 
     revalidatePath(path);
