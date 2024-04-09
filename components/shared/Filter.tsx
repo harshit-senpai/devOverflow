@@ -50,13 +50,13 @@ const Filter = ({ filters, otherClasses, containerClasses }: Props) => {
               <SelectValue placeholder="Select a Filter" />
             </div>
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="text-dark500_light700 small-regular border-none bg-light-900 dark:bg-dark-300">
             <SelectGroup>
               {filters.map((item) => (
                 <SelectItem
                   key={item.value}
                   value={item.value}
-                  className="background-light800_dark300 text-dark500_light700  body-regular light-border border"
+                  className="focus:bg-light-800 dark:focus:bg-dark-400 body-regular cursor-pointer"
                 >
                   {item.name}
                 </SelectItem>
