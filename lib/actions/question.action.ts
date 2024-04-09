@@ -199,6 +199,10 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
       throw new Error("Question not found");
     }
 
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasupVoted ? -1 : 1 },
+    });
+
     revalidatePath(path);
   } catch (error) {
     console.log(error);
