@@ -1,7 +1,6 @@
 "use client";
 
 import { downvoteAnswer, upvoteAnswer } from "@/lib/actions/answer.actions";
-import { viewQuestion } from "@/lib/actions/interaction.action";
 import {
   downvoteQuestion,
   upvoteQuestion,
@@ -94,10 +93,21 @@ const Votes = ({
     }
   };
 
-    viewQuestion({
-      questionId: JSON.parse(itemId),
-      userId: userId ? JSON.parse(userId) : undefined,
-    });
+  // viewQuestion({
+  //   questionId: JSON.parse(itemId),
+  //   userId: userId ? JSON.parse(userId) : undefined,
+  // });
+
+  useEffect(() => {
+    const callViewQuestion = async () => {
+      const { viewQuestion } = await import("@/lib/actions/interaction.action");
+      viewQuestion({
+        questionId: JSON.parse(itemId),
+        userId: userId ? JSON.parse(userId) : undefined,
+      });
+    };
+    callViewQuestion();
+  });
 
   return (
     <div className="flex gap-5">
