@@ -17,6 +17,7 @@ import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
 import Answer from "@/database/answer.model";
 import { BadgeCriteriaType } from "@/types";
+import { assignBadges } from "@/utils/util";
 
 export async function getAllUsers(params: GetAllUsersParams) {
   try {
@@ -304,10 +305,13 @@ export async function getUserInfo(params: GetUserByIdParams) {
       },
     ];
 
+    const badgeCounts = assignBadges({ criteria });
+
     return {
       user,
       totalAnswers,
       totalQuestions,
+      badgeCounts,
     };
   } catch (error) {
     console.log(error);
