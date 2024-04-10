@@ -8,6 +8,11 @@ import Link from "next/link";
 import { SearchParamsProps } from "@/types";
 import Pagination from "@/components/shared/Pagination";
 import Loading from "./loading";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Community | DevOverFlow",
+};
 
 const Page = async (searchParams: SearchParamsProps) => {
   const result = await getAllUsers({

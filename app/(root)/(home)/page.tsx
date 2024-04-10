@@ -9,7 +9,11 @@ import Link from "next/link";
 import { getAllQuestions } from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
 import Pagination from "@/components/shared/Pagination";
-import Loading from "./loading";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home | DevOverFlow",
+};
 
 export default async function Home(searchParams: SearchParamsProps) {
   const result = await getAllQuestions({

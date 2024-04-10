@@ -7,6 +7,11 @@ import { QuestionFilters, UserFilters } from "@/constants/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Saved Questions | DevOverFlow",
+};
 
 const Page = async (searchParams: SearchParamsProps) => {
   const { userId } = auth();

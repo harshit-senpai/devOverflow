@@ -8,8 +8,13 @@ import { getUserInfo } from "@/lib/actions/user.action";
 import { URLProps } from "@/types";
 import { getJoinedDate } from "@/utils/util";
 import { SignedIn, auth } from "@clerk/nextjs";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Your Profile | DevOverFlow",
+};
 
 const Page = async ({ params, searchParams }: URLProps) => {
   const userInfo: any = await getUserInfo({ userId: params.id });
