@@ -4,6 +4,7 @@ import { deleteQuestion } from "@/lib/actions/question.action";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   type: string;
@@ -20,10 +21,18 @@ const EditDeleteAction = ({ type, itemId }: Props) => {
         questionId: JSON.parse(itemId),
         path: pathName,
       });
+      return toast({
+        title: `${type} Deleted`,
+        variant: "default",
+      });
     } else if (type === "Answer") {
       await deleteAnswers({
         answerId: JSON.parse(itemId),
         path: pathName,
+      });
+      return toast({
+        title: `${type} Deleted`,
+        variant: "default",
       });
     }
   };

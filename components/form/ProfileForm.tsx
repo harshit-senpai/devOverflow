@@ -20,6 +20,7 @@ import { useState } from "react";
 import { ProfileSchema } from "@/utils/validations";
 import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/lib/actions/user.action";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   clerkId: string;
@@ -57,6 +58,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
         },
         path: pathname,
       });
+      toast({ title: "Profile edited successfully", variant: "default" });
       router.back();
     } catch (error) {
       console.log(error);

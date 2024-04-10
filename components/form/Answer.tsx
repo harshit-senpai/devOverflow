@@ -18,6 +18,7 @@ import { useRef, useState } from "react";
 import { useTheme } from "@/context/ThemeProvider";
 import { createAnswer } from "@/lib/actions/answer.actions";
 import { usePathname } from "next/navigation";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   question: string;
@@ -55,6 +56,9 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
         editor.setContent("");
       }
+      toast({
+        title: "Answer submitted",
+      });
     } catch (error) {
       console.log(error);
     } finally {
