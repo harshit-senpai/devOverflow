@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import { SearchParamsProps } from "@/types";
 import Pagination from "@/components/shared/Pagination";
+import Loading from "./loading";
 
 const Page = async (searchParams: SearchParamsProps) => {
   const result = await getAllUsers({
@@ -14,7 +15,6 @@ const Page = async (searchParams: SearchParamsProps) => {
     filter: searchParams.searchParams.filter,
     page: searchParams.searchParams.page ? +searchParams.searchParams.page : 1,
   });
-
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">All Users</h1>
