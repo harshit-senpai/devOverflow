@@ -51,6 +51,7 @@ export async function getAllQuestions(params: GetQuestionsParams) {
         query.answers = { $size: 0 };
         break;
       default:
+        sortOptions = { createdAt: -1 };
         break;
     }
 
@@ -83,6 +84,7 @@ export async function createQuestion(params: CreateQuestionParams) {
       title,
       content,
       author,
+      createdAt: new Date(),
     });
 
     const tagDocuments = [];

@@ -14,14 +14,19 @@ const Page = async () => {
     redirect("/sign-in");
   }
   const user = await getUserById({ userId });
-  return (
-    <div>
-      <h1 className="h1-bold text-dark100_light900">Ask a Question</h1>
-      <div className="mt-9">
-        <Question user={JSON.stringify(user._id)} />
+  if(!user) {
+    redirect("/ask-question");
+  } else {
+    return (
+      <div>
+        <h1 className="h1-bold text-dark100_light900">Ask a Question</h1>
+        <div className="mt-9">
+          <Question user={JSON.stringify(user._id)} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  
 };
 
 export default Page;
